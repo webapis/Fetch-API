@@ -1,24 +1,23 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+// import GetDataComponent from './components/GetDataComponent';
+import Employee from './components/Employee';
+// import PutDataComponent from './components/PutDataComponent';
+// import DeleteDataComponent from './components/DeleteDataComponent';
+import './css/style.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <div>
+        CREATE,READ,UPDATE,DELETE <i className="underline">JSON data</i> using:
+      </div>
+      <h1> Fetch API </h1>
+      <div className="btn-container">
+        <button type="button">Get List</button>
+      </div>
+
+      <Employee />
     </div>
   );
 }
