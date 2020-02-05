@@ -26,6 +26,8 @@ export default function Employee() {
       url: 'http://localhost:3000/api/createdata',
       data: { firstName, lastName }
     });
+    setLastName('');
+    setFirstName('');
   }
 
   function deleteData(d) {
@@ -33,10 +35,21 @@ export default function Employee() {
     deleteJSONData({
       url: `http://localhost:3000/api/deletedata?id=${d._id}`
     });
+
+    setLastName('');
+    setFirstName('');
+    setSelectedId(null);
   }
 
   function putData() {
-    // putAsJSON({})
+    debugger;
+    putAsJSON({
+      url: `http://localhost:3000/api/updatedata?id=${selectedId}`,
+      data: { firstName, lastName }
+    });
+    setLastName('');
+    setFirstName('');
+    setSelectedId(null);
   }
 
   function handleFirstNameChange(e) {
@@ -46,7 +59,14 @@ export default function Employee() {
   function handleLastNameChange(e) {
     setLastName(e.target.value);
   }
+  function selectEmployee(id) {
+    debugger;
+    const employee = data.find(emp => emp._id === id);
 
+    setSelectedId(id);
+    setFirstName(employee.firstName);
+    setLastName(employee.lastName);
+  }
   if (postError) {
     return <div>{postError.message}</div>;
   }
@@ -70,10 +90,12 @@ export default function Employee() {
               placeholder="FirstName"
               onChange={handleFirstNameChange}
               name="firstname"
+              value={firstName}
             />
           </th>
           <th>
             <input
+              value={lastName}
               type="text"
               placeholder="LastName"
               name="lastname"
@@ -81,12 +103,16 @@ export default function Employee() {
             />
           </th>
           <th>
-            <button type="button" onClick={putAsJSON}>
+            <button disabled={!selectedId} type="button" onClick={putData}>
               Update
             </button>
           </th>
           <th>
-            <button type="button" onClick={post}>
+            <button
+              disabled={selectedId || firstName === '' || lastName === ''}
+              type="button"
+              onClick={post}
+            >
               Insert
             </button>
           </th>
@@ -94,11 +120,13 @@ export default function Employee() {
         {data &&
           data.map(d => {
             return (
-              <tr key={d.message._id}>
-                <td>{d.message.firstName}</td>
-                <td>{d.message.lastName}</td>
+              <tr key={d._id}>
+                <td>{d.firstName}</td>
+                <td>{d.lastName}</td>
                 <td>
-                  <button type="button">Edit</button>
+                  <button type="button" onClick={() => selectEmployee(d._id)}>
+                    Edit
+                  </button>
                 </td>
                 <td>
                   <button type="button" onClick={() => deleteData(d)}>

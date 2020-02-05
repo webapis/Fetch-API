@@ -16,9 +16,9 @@ export default (req, res) => {
 
     const db = client.db();
     db.collection('fruites').updateOne(
-      { id: new ObjectID(id) },
+      { _id: new ObjectID(id) },
       {
-        $set: { firtstName: res.body.firtstName, lastName: res.body.lastName }
+        $set: { firstName: req.body.firstName, lastName: req.body.lastName }
       },
       (error, result) => {
         if (error) {

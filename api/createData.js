@@ -19,7 +19,7 @@ export default (req, res) => {
 
     const db = client.db();
     db.collection('fruites').insertOne(
-      { message: req.body },
+      { firstName: req.body.firstName, lastName: req.body.lastName },
       (error, result) => {
         if (error) {
           res.json(err);

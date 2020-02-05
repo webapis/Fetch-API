@@ -13,9 +13,9 @@ function App() {
         CREATE,READ,UPDATE,DELETE <i className="underline">JSON data</i> using:
       </div>
       <h1> Fetch API </h1>
-      <div className="btn-container">
+      {/* <div className="btn-container">
         <button type="button">Get List</button>
-      </div>
+      </div> */}
 
       <Employee />
     </div>
