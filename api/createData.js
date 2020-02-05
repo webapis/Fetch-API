@@ -2,6 +2,7 @@ const { MongoClient } = require('mongodb');
 const assert = require('assert');
 
 export default (req, res) => {
+  // res.setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
   debugger;
 
   const { url } = process.env;
@@ -15,7 +16,6 @@ export default (req, res) => {
   // Use connect method to connect to the Server
   client.connect(function(err) {
     assert.equal(null, err);
-    console.log('Connected successfully to server');
 
     const db = client.db();
     db.collection('fruites').insertOne(

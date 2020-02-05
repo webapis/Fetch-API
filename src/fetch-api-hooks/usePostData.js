@@ -5,6 +5,7 @@ export default function usePostData() {
   const [postError, setError] = useState(null);
   async function postAsJSON({ data, url }) {
     try {
+      debugger;
       const result = await fetch(url, {
         method: 'POST',
         headers: {
@@ -12,7 +13,7 @@ export default function usePostData() {
         },
         body: JSON.stringify(data)
       });
-
+      debugger;
       setPostResult(result);
     } catch (err) {
       setError(err);
